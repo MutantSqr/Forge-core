@@ -278,6 +278,7 @@ class SecurityManager:
         audit_stats = self.audit_logger.get_stats()
         
         return {
+            "enabled": True,
             "authentication": auth_stats,
             "authorization": authz_stats,
             "audit": audit_stats,

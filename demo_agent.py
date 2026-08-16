@@ -97,8 +97,8 @@ def demo_marketing_agent():
     print(f"Task Manager: {status['tasks']['queue']['total_tasks']} tasks in queue")
     print(f"Tools Available: {status['tools']['registry']['total_tools']} tools registered")
     print(f"Active Modules: {status['modules']['active_modules']} modules running")
-    print(f"Security: {'✅ Enabled' if status['security']['enabled'] else '❌ Disabled'}")
-    print(f"Auditing: {'✅ Enabled' if status['audit']['enabled'] else '❌ Disabled'}")
+    print(f"Security: {'✅ Enabled' if status['security'].get('encryption_enabled', False) else '❌ Disabled'}")
+    print(f"Auditing: {'✅ Enabled' if status['audit'].get('event_logger', {}).get('enabled', False) else '❌ Disabled'}")
     
     # Shutdown
     print("\n" + "="*60)

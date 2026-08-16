@@ -243,6 +243,7 @@ class AuditSystem:
         """
         health = {
             "timestamp": datetime.now().isoformat(),
+            "enabled": True,
             "event_logging": "healthy",
             "performance_monitoring": "disabled" if not self._enable_performance_monitoring else "healthy",
             "error_tracking": "disabled" if not self._enable_error_tracking else "healthy",
@@ -258,7 +259,7 @@ class AuditSystem:
             health["performance_statistics"] = perf_stats
         
         if self._enable_error_tracking and self.error_tracker:
-            error_stats = self.error_tracker.get_statistics()
+            error_stats = self.error_tracker.get_error_statistics()
             health["error_statistics"] = error_stats
         
         return health
