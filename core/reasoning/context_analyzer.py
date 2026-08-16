@@ -29,6 +29,25 @@ class ContextAnalysis:
     constraints: List[str]
     confidence: float
     metadata: Dict[str, Any]
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """
+        Convert ContextAnalysis to dictionary for serialization.
+        
+        Returns:
+            Dictionary representation of the context analysis
+        """
+        return {
+            'context_type': self.context_type.value if isinstance(self.context_type, ContextType) else self.context_type,
+            'key_entities': self.key_entities,
+            'intent': self.intent,
+            'urgency': self.urgency,
+            'complexity': self.complexity,
+            'available_resources': self.available_resources,
+            'constraints': self.constraints,
+            'confidence': self.confidence,
+            'metadata': self.metadata
+        }
 
 
 class ContextAnalyzer:

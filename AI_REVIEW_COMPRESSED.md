@@ -58,6 +58,8 @@
 1. **Vector Store FTS**: Removed external content dependency
 2. **Module Exports**: Added ReasoningMode to exports
 3. **Cleanup**: Removed all cache/temp files
+4. **Task Queue Deadlock**: Fixed threading.Lock → RLock in get_statistics()
+5. **Event Logger Serialization**: Added custom JSON serializer for non-serializable objects
 
 ---
 

@@ -4,7 +4,7 @@ Task Queue - Priority-based task scheduling and queueing
 
 import heapq
 from typing import Dict, List, Optional, Callable
-from threading import Lock
+from threading import RLock
 from datetime import datetime
 
 from .task import Task, TaskStatus, TaskPriority
@@ -25,7 +25,7 @@ class TaskQueue:
         self.max_size = max_size
         self._queue: List[tuple] = []  # (priority, timestamp, task)
         self._task_map: Dict[str, Task] = {}  # task_id -> Task
-        self._lock = Lock()
+        self._lock = RLock()  # Use RLock to prevent deadlock in get_statistics
         self._counter = 0  # For FIFO ordering within same priority
         
     def enqueue(self, task: Task) -> bool:

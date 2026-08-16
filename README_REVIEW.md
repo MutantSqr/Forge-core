@@ -124,16 +124,26 @@ python demo_agent.py
 
 ## 🐛 Recent Bug Fixes
 
-**Commit**: `b63dd8b` - Fix vector store FTS integration and export ReasoningMode
+**Commits**: Multiple fixes addressing critical bugs
 
-1. **Vector Store FTS Integration**
+1. **Vector Store FTS Integration** (Commit: b63dd8b)
    - Removed external content dependency
    - Simplified FTS table schema
    - Fixed INSERT statements
 
-2. **Module Exports**
+2. **Module Exports** (Commit: b63dd8b)
    - Added ReasoningMode to exports
    - Fixed import errors
+
+3. **Task Queue Deadlock** (Latest fix)
+   - Changed threading.Lock to RLock in task_queue.py
+   - Prevents deadlock in get_statistics() method
+   - Fixes agent.get_agent_status() hanging issue
+
+4. **Event Logger Serialization** (Latest fix)
+   - Added custom JSON serializer for non-serializable objects
+   - Handles ContextAnalysis and other dataclasses
+   - Prevents silent log loss in event_logger.py
 
 ---
 

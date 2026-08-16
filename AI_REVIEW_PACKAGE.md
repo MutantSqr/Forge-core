@@ -382,6 +382,8 @@ pytest-cov                # Coverage reporting
 3. **Demo Scripts**: Created comprehensive demos
 4. **Documentation**: Added review guides
 5. **Cleanup**: Removed cache and temporary files
+6. **Task Queue Deadlock Fix**: Changed threading.Lock to RLock to prevent deadlock in get_statistics()
+7. **Event Logger Serialization**: Added custom JSON serializer to handle non-serializable objects like ContextAnalysis
 
 ---
 

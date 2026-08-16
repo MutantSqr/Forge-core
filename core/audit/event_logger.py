@@ -82,7 +82,7 @@ class EventLogger:
         try:
             log_file = self.log_path / f"events_{timestamp.strftime('%Y%m%d')}.log"
             with open(log_file, 'a') as f:
-                f.write(json.dumps(event) + '\n')
+                f.write(json.dumps(event, default=self._json_serializer) + '\n')
             return True
         except Exception as e:
             print(f"Error writing event log: {e}")
@@ -92,6 +92,35 @@ class EventLogger:
         """Generate a unique event ID."""
         import uuid
         return str(uuid.uuid4())
+    
+    def _json_serializer(self, obj):
+        """
+        Custom JSON serializer for non-serializable objects.
+        
+        Args:
+            obj: Object to serialize
+            
+        Returns:
+            Serializable representation of the object
+        """
+        # Handle dataclasses
+        if hasattr(obj, '__dataclass_fields__'):
+            return {k: v for k, v in obj.__dict__.items() if not k.startswith('_')}
+        
+        # Handle objects with to_dict method
+        if hasattr(obj, 'to_dict'):
+            return obj.to_dict()
+        
+        # Handle datetime objects
+        if isinstance(obj, datetime):
+            return obj.isoformat()
+        
+        # Handle enums
+        if isinstance(obj, Enum):
+            return obj.value
+        
+        # Handle other non-serializable objects by converting to string
+        return str(obj)
     
     def get_events(self,
                   start_date: Optional[datetime] = None,

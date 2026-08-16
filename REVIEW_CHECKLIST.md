@@ -78,6 +78,8 @@
 - [x] No hardcoded secrets or API keys
 - [x] Proper error handling implemented
 - [x] Logging configured throughout
+- [x] Fixed task queue deadlock issue (Lock → RLock)
+- [x] Fixed event logger serialization for non-serializable objects
 
 ### Functionality
 - [x] All core systems implemented and tested

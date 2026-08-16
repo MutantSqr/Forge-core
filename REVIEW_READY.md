@@ -75,6 +75,8 @@ python interactive_agent.py
 - Created comprehensive demo scripts
 - Added review checklist
 - Cleaned all cache and temporary files
+- Fixed task queue deadlock (Lock → RLock)
+- Fixed event logger serialization for non-serializable objects
 
 ## 🎨 Demonstration Capabilities
 
