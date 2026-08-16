@@ -62,6 +62,7 @@
 5. **Event Logger Serialization**: Added custom JSON serializer for non-serializable objects
 6. **ErrorTracker Method**: Fixed get_statistics() → get_error_statistics()
 7. **Status Dictionary Fields**: Added missing 'enabled' fields
+8. **Status Display Logic**: Fixed incorrect field paths in demo_agent.py status checks
 
 ---
 
