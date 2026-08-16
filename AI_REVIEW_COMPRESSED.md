@@ -60,6 +60,8 @@
 3. **Cleanup**: Removed all cache/temp files
 4. **Task Queue Deadlock**: Fixed threading.Lock → RLock in get_statistics()
 5. **Event Logger Serialization**: Added custom JSON serializer for non-serializable objects
+6. **ErrorTracker Method**: Fixed get_statistics() → get_error_statistics()
+7. **Status Dictionary Fields**: Added missing 'enabled' fields
 
 ---
 
