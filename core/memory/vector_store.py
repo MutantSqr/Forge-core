@@ -57,7 +57,7 @@ class VectorStore:
             # Full-text search for basic semantic matching
             cursor.execute("""
                 CREATE VIRTUAL TABLE IF NOT EXISTS documents_fts 
-                USING fts5(content, key, content_rowid=documents.rowid)
+                USING fts5(content, key)
             """)
             
             conn.commit()
@@ -93,8 +93,8 @@ class VectorStore:
                 
                 # Update full-text search
                 cursor.execute("""
-                    INSERT OR REPLACE INTO documents_fts (rowid, content, key)
-                    VALUES (last_insert_rowid(), ?, ?)
+                    INSERT INTO documents_fts (content, key)
+                    VALUES (?, ?)
                 """, (content, key))
                 
                 conn.commit()
@@ -124,7 +124,7 @@ class VectorStore:
                     SELECT d.key, d.content, d.metadata, 
                           _bm25.documents_fts as score
                     FROM documents d
-                    JOIN documents_fts fts ON d.rowid = fts.rowid
+                    JOIN documents_fts fts ON d.key = fts.key
                     WHERE documents_fts MATCH ?
                     ORDER BY score
                     LIMIT ?
